@@ -37,7 +37,7 @@ int main() {
         <<"[2] - Bajas \n"
         <<"[3] - Cambios \n"
         <<"[4] - Consulta Individual\n"
-        <<"[5] - Consulta Genetral \n"
+        <<"[5] - Consulta General \n"
         <<"[6] - Salir \n"
         <<"Seleccione una opcion: ";
         std::cin>>opc;
@@ -101,11 +101,10 @@ void Altas(std::fstream& archivoDeportistasEntSal){
 
     archivoDeportistasEntSal.seekg((d.obtenerNumeroDeSocio()-1)* sizeof(Deportista));
     archivoDeportistasEntSal.read(reinterpret_cast<char *>(&d),sizeof(Deportista));
-
+    d.establecerNumeroDeSocio(numero);
     if(d.obtenerNombre() != ""){
         std::cout<<"Ya existe ese registro"<<std::endl;
     }else{
-
         while(d.obtenerNumeroDeSocio() >= 1 && d.obtenerNumeroDeSocio() <= 100){
             std::cout<<"Teclea  el nombre , edad, sexo  y deporte\n?";
             std::cin>>std::setw(15)>>nombre;

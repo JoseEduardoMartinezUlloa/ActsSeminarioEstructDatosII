@@ -5,7 +5,7 @@
 
 
 //setters
-void Deportista::establecerNumeroDeSocio(int num){numeroDeSocio = num;}
+void Deportista::establecerNumeroDeSocio(int num){this->numeroDeSocio = num;}
 
 
 void Deportista::establecerNombre(std::string cadenaNombre){  const char* valorNombre = cadenaNombre.data();
@@ -51,6 +51,3 @@ Deportista::Deportista(int num,std::string name, int edd,std::string sex, std::s
  establecerSexo(sex);
  establecerDeporte(dep);
 }
-
-
-
