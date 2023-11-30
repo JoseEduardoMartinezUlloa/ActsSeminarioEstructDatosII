@@ -78,7 +78,6 @@ public:
     T Busqueda(T);
 
     void GuardarInformacion();
-    void CargarInformacion();
 };
 
 template<class T>
@@ -190,8 +189,13 @@ T LDLDE<T>::Busqueda(T elm){
     while (aux != nullptr && aux->getData() != elm) {
         aux = aux->getNext();
     }
-    return aux->getData();
     
+    if (aux != nullptr) {
+        return aux->getData();
+    } else {
+        T datoVacio;
+        return datoVacio;
+    }
 }
 
 
@@ -206,32 +210,14 @@ void LDLDE<T>::GuardarInformacion() {
 
     node<T>* aux = header;
     while (aux != nullptr) {
-        archivo << aux->getData();  
+        archivo << aux->getData().getNombre() << " "
+                << aux->getData().getOrigen() << " "
+                << aux->getData().getDestino() << " "
+                << aux->getData().getFechaSalida() << " "
+                << aux->getData().getHoraSalida() << " "
+                << aux->getData().getFechaLlegada() << " "
+                << aux->getData().getHoraLlegada() << "\n";
         aux = aux->getNext();
-    }
-
-    archivo.close();
-}
-
-template<class T>
-void LDLDE<T>::CargarInformacion() {
-    std::ifstream archivo("Pasajeros.txt");
-
-    if (!archivo.is_open()) {
-        std::cerr << "Error al abrir el archivo para cargar información.\n";
-        return;
-    }
-
-    
-    while (header != nullptr) {
-        node<T>* temp = header;
-        header = header->getNext();
-        delete temp;
-    }
-
-    T tempData;
-    while (archivo >> tempData) {  
-        insertar(tempData);
     }
 
     archivo.close();
